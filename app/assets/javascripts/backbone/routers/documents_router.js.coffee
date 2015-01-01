@@ -16,7 +16,9 @@ class RubyFs.Routers.DocumentsRouter extends Backbone.Router
 
   index: ->
     @view = new RubyFs.Views.Documents.IndexView(collection: @documents)
+    @counterView = new RubyFs.Views.Documents.CounterView(collection: @documents)
     $("#documents").html(@view.render().el)
+    $("#documents-counter").html(@counterView.render().el)
 
   show: (id) ->
     document = @documents.get(id)
