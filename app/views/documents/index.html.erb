@@ -1,0 +1,9 @@
+<div id="documents"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // Document is the app name
+    window.router = new RubyFs.Routers.DocumentsRouter({documents: <%= @documents.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
