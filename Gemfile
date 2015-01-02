@@ -46,3 +46,5 @@ end
 gem 'mysql2'
 gem 'rails-backbone', github: 'codebrew/backbone-rails'
 gem 'foundation-rails'
+gem 'paperclip'
+#gem 'jquery-fileupload-rails'

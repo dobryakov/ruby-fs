@@ -51,6 +51,18 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def attach
+    @document = Document.find(params[:id])
+    if @document
+      @document.file = params[:document][:file]
+      @document.save
+      respond_to do |format|
+        format.html { redirect_to @document, notice: 'Document was successfully attached.' }
+        format.json { render :show, status: :ok, location: @document }
+      end
+    end
+  end
+
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
@@ -69,6 +81,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:title)
+      params.require(:document).permit(:id, :title, :file)
     end
 end
