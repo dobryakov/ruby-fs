@@ -3,6 +3,7 @@ class RubyFs.Models.Document extends Backbone.Model
 
   defaults:
     title: null
+    file_url: null
 
 class RubyFs.Collections.DocumentsCollection extends Backbone.Collection
   model: RubyFs.Models.Document
