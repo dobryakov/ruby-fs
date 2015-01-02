@@ -3,7 +3,7 @@
 <script type="text/javascript">
   $(function() {
     // Document is the app name
-    window.router = new RubyFs.Routers.DocumentsRouter({documents: <%= @documents.to_json.html_safe -%>});
+    window.router = new RubyFs.Routers.DocumentsRouter({documents: <%= @documents.to_json(:methods => [:file_url]).html_safe -%>});
     Backbone.history.start();
   });
 </script>
