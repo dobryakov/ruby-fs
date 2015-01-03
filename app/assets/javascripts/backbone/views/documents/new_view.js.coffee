@@ -11,6 +11,8 @@ class RubyFs.Views.Documents.NewView extends Backbone.View
     super(options)
     @model = new @collection.model()
     @files = {}
+    console.log "CONSTRUCTOR"
+    console.log @model
 
     @model.bind("change:errors", () =>
       this.render()
@@ -26,7 +28,29 @@ class RubyFs.Views.Documents.NewView extends Backbone.View
 
     data = new FormData()
     $.each(@files, (key, value) -> data.append('document[file]', value))
+    data.append('document[title]', $('#new-document #title').val())
 
+    console.log @model
+
+    $.ajax '/documents.json',
+      type: 'POST'
+      data: data
+      cache: false
+      dataType: 'json'
+      processData: false
+      contentType: false
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log textStatus
+      success: (data, textStatus, jqXHR) ->
+        @model = new RubyFs.Models.Document(data)
+        console.log @model
+        @collection.add(@model)
+        #window.location.hash = "/#{@model.id}"
+
+  createDocument: (data) ->
+    console.log data
+
+    ###
     @model.unset("errors")
     @model.unset("file")
 
@@ -51,6 +75,7 @@ class RubyFs.Views.Documents.NewView extends Backbone.View
       error: (document, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
+    ###
 
   render: ->
     @$el.html(@template(@model.toJSON() ))
