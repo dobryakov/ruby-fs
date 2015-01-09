@@ -43,6 +43,7 @@ class RubyFs.Views.Documents.NewView extends Backbone.View
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
       success: (data, textStatus, jqXHR) =>
         @model.set(data)
+        @model.unset('file')
         @collection.add(@model)
         window.location.hash ="/#{@model.id}"
 

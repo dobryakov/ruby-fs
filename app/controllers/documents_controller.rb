@@ -51,6 +51,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # unused now (see jquery ajax in backbone views)
   def attach
     @document = Document.find(params[:id])
     if @document
